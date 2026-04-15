@@ -96,7 +96,11 @@ function handleImage(e) {
 function submit() {
   isSubmitting.value = true
   const data = new FormData()
-  Object.entries(form.value).forEach(([k, v]) => { if (v !== null && v !== undefined) data.append(k, v) })
+  data.append('name', form.value.name)
+  data.append('role', form.value.role)
+  data.append('order', form.value.order)
+  data.append('active', form.value.active ? '1' : '0')
+  if (form.value.image_url) data.append('image_url', form.value.image_url)
   if (imageFile.value) data.append('image', imageFile.value)
 
   const options = { onFinish: () => { isSubmitting.value = false }, forceFormData: true }

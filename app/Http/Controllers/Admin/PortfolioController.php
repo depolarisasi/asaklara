@@ -38,7 +38,7 @@ class PortfolioController extends Controller
     public function edit(Portfolio $portfolio)
     {
         return Inertia::render('Admin/Portfolio/Form', [
-            'portfolio' => $portfolio,
+            'portfolio' => [...$portfolio->toArray(), 'image_url' => $portfolio->image_url],
             'categories' => $this->getCategories(),
         ]);
     }

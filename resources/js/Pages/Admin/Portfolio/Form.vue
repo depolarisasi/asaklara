@@ -16,7 +16,7 @@
           <h3 class="font-semibold mb-4 text-sm">Gambar Project</h3>
           <div class="flex items-start gap-6">
             <div class="w-32 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-white/5 flex items-center justify-center">
-              <img v-if="imagePreview || portfolio?.image" :src="imagePreview || portfolio?.image"
+              <img v-if="imagePreview || portfolio?.image_url" :src="imagePreview || portfolio?.image_url"
                    class="w-full h-full object-cover" />
               <svg v-else class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #4b5563">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -162,9 +162,16 @@ function handleImage(e) {
 function submit() {
   isSubmitting.value = true
   const data = new FormData()
-  Object.entries(form.value).forEach(([k, v]) => {
-    if (v !== null && v !== undefined) data.append(k, v)
-  })
+  data.append('title', form.value.title)
+  data.append('slug', form.value.slug)
+  data.append('description', form.value.description)
+  data.append('client', form.value.client)
+  data.append('year', form.value.year)
+  data.append('category', form.value.category)
+  data.append('order', form.value.order)
+  data.append('active', form.value.active ? '1' : '0')
+  data.append('featured', form.value.featured ? '1' : '0')
+  if (form.value.image_url) data.append('image_url', form.value.image_url)
   if (imageFile.value) data.append('image', imageFile.value)
 
   const options = {

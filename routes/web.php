@@ -12,16 +12,26 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TeamController;
 use Illuminate\Support\Facades\Route;
+use Spatie\ResponseCache\Middlewares\CacheResponse;
+use Spatie\ResponseCache\Middlewares\DoNotCacheResponse;
 
 // =========================================
 // PUBLIC ROUTES
 // =========================================
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/services', [ServicesController::class, 'index'])->name('services');
-Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit')->middleware('throttle:5,1');
+
+// Halaman statis — di-cache (konten jarang berubah)
+Route::middleware([CacheResponse::class])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/about', [AboutController::class, 'index'])->name('about');
+    Route::get('/services', [ServicesController::class, 'index'])->name('services');
+    Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+});
+
+// Contact — TIDAK di-cache karena ada flash message & CSRF form
+Route::middleware([DoNotCacheResponse::class])->group(function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit')->middleware('throttle:5,1');
+});
 
 // =========================================
 // ADMIN ROUTES

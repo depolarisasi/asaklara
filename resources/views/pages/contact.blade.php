@@ -117,23 +117,29 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('contact.submit') }}" method="POST" class="space-y-6"
+                          x-data="{ sending: false }"
+                          @submit="sending = true">
                         @csrf
                         <div class="grid sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Your Name *</label>
                                 <input type="text" name="name" value="{{ old('name') }}" required
                                        placeholder="John Doe"
-                                       class="w-full rounded-xl h-12 px-4 text-sm bg-background/60 backdrop-blur-xl border border-border/50 transition-all focus:outline-none focus:border-primary"
-                                       style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));">
+                                       class="w-full rounded-xl h-12 px-4 text-sm transition-all focus:outline-none"
+                                       style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));"
+                                       onfocus="this.style.borderColor='rgb(var(--color-primary))'"
+                                       onblur="this.style.borderColor='rgba(var(--color-border),0.5)'">
                                 @error('name')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2">Email Address *</label>
                                 <input type="email" name="email" value="{{ old('email') }}" required
                                        placeholder="john@example.com"
-                                       class="w-full rounded-xl h-12 px-4 text-sm bg-background/60 backdrop-blur-xl border border-border/50 transition-all focus:outline-none focus:border-primary"
-                                       style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));">
+                                       class="w-full rounded-xl h-12 px-4 text-sm transition-all focus:outline-none"
+                                       style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));"
+                                       onfocus="this.style.borderColor='rgb(var(--color-primary))'"
+                                       onblur="this.style.borderColor='rgba(var(--color-border),0.5)'">
                                 @error('email')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
                             </div>
                         </div>
@@ -142,8 +148,10 @@
                             <label class="block text-sm font-medium mb-2">Subject *</label>
                             <input type="text" name="subject" value="{{ old('subject') }}" required
                                    placeholder="How can we help you?"
-                                   class="w-full rounded-xl h-12 px-4 text-sm bg-background/60 backdrop-blur-xl border border-border/50 transition-all focus:outline-none focus:border-primary"
-                                   style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));">
+                                   class="w-full rounded-xl h-12 px-4 text-sm transition-all focus:outline-none"
+                                   style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));"
+                                   onfocus="this.style.borderColor='rgb(var(--color-primary))'"
+                                   onblur="this.style.borderColor='rgba(var(--color-border),0.5)'">
                             @error('subject')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
                         </div>
 
@@ -151,16 +159,27 @@
                             <label class="block text-sm font-medium mb-2">Message *</label>
                             <textarea name="message" rows="6" required
                                       placeholder="Tell us about your project..."
-                                      class="w-full rounded-xl px-4 py-3 text-sm bg-background/60 backdrop-blur-xl border border-border/50 transition-all focus:outline-none focus:border-primary resize-none"
-                                      style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));">{{ old('message') }}</textarea>
+                                      class="w-full rounded-xl px-4 py-3 text-sm transition-all focus:outline-none resize-none"
+                                      style="background: rgba(var(--color-card), 0.5); border: 1px solid rgba(var(--color-border), 0.5); color: rgb(var(--color-foreground));"
+                                      onfocus="this.style.borderColor='rgb(var(--color-primary))'"
+                                      onblur="this.style.borderColor='rgba(var(--color-border),0.5)'">{{ old('message') }}</textarea>
                             @error('message')<p class="mt-1 text-xs text-red-400">{{ $message }}</p>@enderror
                         </div>
 
                         <button type="submit"
-                                class="w-full py-4 rounded-full font-semibold flex items-center justify-center gap-2 transition-opacity hover:opacity-90"
+                                :disabled="sending"
+                                class="w-full py-4 rounded-full font-semibold flex items-center justify-center gap-2 transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
                                 style="background: rgb(var(--color-primary)); color: rgb(var(--color-primary-foreground));">
-                            Send Message
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                            {{-- Loading state --}}
+                            <svg x-show="sending" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                            </svg>
+                            {{-- Default state --}}
+                            <svg x-show="!sending" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                            <span x-text="sending ? 'Sending...' : 'Send Message'">Send Message</span>
                         </button>
                     </form>
                 </div>
