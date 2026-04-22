@@ -13,14 +13,17 @@
 - [x] Response cache terdaftar di routes (home, about, services, portfolio)
 
 ### Frontend Publik
-- [x] home.blade.php — Lengkap (549 lines, hero + services + portfolio + stats + team)
-- [x] about.blade.php — Lengkap (story + values + team + stats)
-- [x] services.blade.php — **DIPERKAYA** (stats bar + service nav tabs + "Why ASAK" section + floating badge)
-- [x] portfolio.blade.php — **DIPERKAYA** (stats bar + featured badge + scale hover + improved empty state)
-- [x] contact.blade.php — Lengkap (Alpine.js loading state pada submit)
+- [x] home.blade.php — Refactor Styling: Pembersihan inline styles & optimasi Tailwind
+- [x] about.blade.php — Refactor Styling: Pembersihan inline styles & optimasi Tailwind
+- [x] services.blade.php — Refactor Styling: Pembersihan inline styles & optimasi Tailwind
+- [x] portfolio.blade.php — Refactor Styling: Pembersihan inline styles & optimasi Tailwind
+- [x] contact.blade.php — Refactor Styling: Pembersihan inline styles & optimasi Tailwind
+- [x] resources/css/app.css — Konsolidasi utility classes & Custom CSS Variables sistem --pub-*
 - [x] public.blade.php — Layout dengan CSS variables, light/dark theme switcher
 - [x] navbar.blade.php — Pill nav, mobile menu, scroll-aware
 - [x] footer.blade.php — Logo, newsletter form, links, social icons
+- [x] Restorasi Hero Index — Grid 50/50, premium glassmorphism, dan unifikasi navigasi
+- [x] Restorasi CTA Gradient — Perbaikan sintaks modern CSS variable untuk background & gradient kartu.
 
 ### Frontend Admin
 - [x] Dashboard.vue — Stats + recent submissions + quick links
@@ -59,4 +62,5 @@
 - [ ] SEO meta tags per halaman (saat ini hanya meta description global)
 
 ## Known Issues
-- Tidak ada — semua bug yang ditemukan sudah diperbaiki per 2026-04-15
+- Tidak ada bug kritis. Penyesuaian mockup ke kode sudah selesai 100% untuk Hero Section.
+- Navbar sudah terunifikasi menjadi satu kontainer responsif.

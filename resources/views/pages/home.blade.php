@@ -8,144 +8,153 @@
      Semua warna pakai CSS variables (--color-panel-dark / --color-panel-text)
      agar ikut color scheme & theme switcher
      ============================================================ --}}
-<section style="position:relative; min-height:100vh; overflow:hidden; background:rgb(var(--color-panel-dark));">
+<section class="hero-container">
 
     {{-- Background image + gradient overlays --}}
-    <div style="position:absolute; inset:0;">
-        <img src="{{asset('hero-image.png')}}"
-             alt=""
-             style="width:100%; height:100%; object-fit:cover; opacity:0.85;">
-        {{-- Directional gradient: kiri gelap (area teks), kanan lebih transparan (area foto) --}}
-        <div style="position:absolute; inset:0;
-                    background: linear-gradient(110deg,
-                        rgba(var(--color-panel-dark),0.92) 0%,
-                        rgba(var(--color-panel-dark),0.30) 60%,
-                        rgba(var(--color-panel-dark),0.55) 100%);"></div>
-        {{-- Bottom fade --}}
-        <div style="position:absolute; inset:0;
-                    background: linear-gradient(to top,
-                        rgba(var(--color-panel-dark),1) 0%,
-                        transparent 50%);"></div>
-        {{-- Accent glow top-right --}}
-        <div style="position:absolute; top:0; right:0; width:24rem; height:24rem;
-                    border-radius:9999px;
-                    background:rgba(var(--color-accent),0.10);
-                    filter:blur(80px);"></div>
+    <div class="hero-media">
+        <img src="{{asset('hero-image.png')}}" alt="Hero Image">
+        <div class="hero-overlay-directional"></div>
+        <div class="hero-overlay-primary"></div>
+        <div class="hero-overlay-bottom"></div>
+        <div class="hero-accent-glow"></div>
     </div>
 
-    {{-- Content: flex column — fills full height, no absolute overlap --}}
-    <div style="position:relative; z-index:10; min-height:100vh;
-                display:flex; flex-direction:column;">
+    {{-- Content: flex column --}}
+    <div class="relative z-10 min-h-screen flex flex-col">
 
         {{-- Spacer untuk navbar --}}
-        <div style="height:6.5rem; flex-shrink:0;"></div>
+        <div class="navbar-spacer"></div>
 
-        {{-- Main area: flex-grow, konten di bawah (items-end) --}}
+        {{-- Main area --}}
         <div class="flex-1 flex items-end container mx-auto px-6 lg:px-8 pb-16">
             <div class="w-full">
 
-                {{-- Grid 2 kolom: kiri counter + insight, kanan konten utama --}}
+                {{-- Grid 2 kolom --}}
                 <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end">
 
-                    {{-- KIRI: Counter stats (atas) + Latest Insight card (bawah) --}}
+                    {{-- KIRI: Counter stats + Carousel --}}
                     <div class="flex flex-col gap-6 order-2 lg:order-1">
 
-                        {{-- Stats / Counters --}}
-                        <div class="grid grid-cols-3 gap-4">
-                            @foreach([
-                                ['100s',  'International Projects'],
-                                ['100%',  'Radical Transparency'],
-                                ['Zero',  'Delay Protocol'],
-                            ] as [$num, $label])
-                            <div class="p-5 rounded-2xl text-center"
-                                 style="background: rgba(var(--color-panel-text), 0.06);
-                                        backdrop-filter: blur(24px);
-                                        -webkit-backdrop-filter: blur(24px);
-                                        border: 1px solid rgba(var(--color-panel-text), 0.12);">
-                                <p class="font-heading font-bold mb-1"
-                                   style="font-size: clamp(1.4rem, 3vw, 2rem);
-                                          color: rgb(var(--color-panel-text));">
-                                    {{ $num }}
-                                </p>
-                                <p class="text-xs leading-snug"
-                                   style="color: rgba(var(--color-panel-text), 0.50);">
-                                    {{ $label }}
-                                </p>
-                            </div>
-                            @endforeach
-                        </div>
+                       
 
-                        {{-- Latest Insight card --}}
-                        <a href="#"
-                           class="group block p-6 rounded-2xl transition-all duration-300"
-                           style="background: rgba(var(--color-panel-text), 0.07);
-                                  backdrop-filter: blur(24px);
-                                  -webkit-backdrop-filter: blur(24px);
-                                  border: 1px solid rgba(var(--color-panel-text), 0.14);
-                                  text-decoration: none;"
-                           onmouseenter="this.style.background='rgba(var(--color-panel-text),0.11)'"
-                           onmouseleave="this.style.background='rgba(var(--color-panel-text),0.07)'">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-xs font-bold uppercase tracking-widest"
-                                      style="color: rgb(var(--color-accent));">Latest Insight</span>
-                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                                     style="color: rgba(var(--color-panel-text), 0.35);"
-                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M7 17L17 7M17 7H7M17 7v10"/>
-                                </svg>
+                        {{-- Latest Insight Carousel --}}
+                        <div class="w-full max-w-md">
+                            <div x-data="{ 
+                                    activeSlide: 0, 
+                                    insights: [
+                                        { 
+                                            category: 'Brand Engineering', 
+                                            title: 'How to build a brand identity system that AI can actually use', 
+                                            readTime: '5 min read',
+                                            image: '{{ asset('images/insight-ai-brand.png') }}',
+                                            link: '#'
+                                        },
+                                        { 
+                                            category: 'Tech Development', 
+                                            title: 'Future-proofing your tech stack with modular architecture', 
+                                            readTime: '7 min read',
+                                            image: '{{ asset('images/insight-tech-arch.png') }}',
+                                            link: '#'
+                                        },
+                                        { 
+                                            category: 'Growth Hacking', 
+                                            title: 'Data-driven growth strategies that scaled $10M+ brands', 
+                                            readTime: '6 min read',
+                                            image: '{{ asset('images/insight-data-growth.png') }}',
+                                            link: '#'
+                                        }
+                                    ],
+                                    next() { this.activeSlide = (this.activeSlide + 1) % this.insights.length },
+                                    prev() { this.activeSlide = (this.activeSlide - 1 + this.insights.length) % this.insights.length },
+                                    init() { setInterval(() => this.next(), 8000) }
+                                 }"
+                                 class="relative">
+                                
+                                <div class="relative overflow-hidden h-[120px] lg:h-[130px]">
+                                    <template x-for="(insight, index) in insights" :key="index">
+                                        <div x-show="activeSlide === index"
+                                             x-transition:enter="transition ease-out duration-700"
+                                             x-transition:enter-start="opacity-0 translate-y-4 scale-95"
+                                             x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                                             x-transition:leave="transition ease-in duration-500 absolute inset-0"
+                                             x-transition:leave-start="opacity-100 scale-100"
+                                             x-transition:leave-end="opacity-0 scale-105"
+                                             class="absolute inset-0">
+                                            
+                                            <a :href="insight.link"
+                                               class="insight-card group block p-4 rounded-2xl h-full no-underline">
+                                                
+                                                <div class="flex gap-5 items-center h-full">
+                                                    {{-- Thumbnail --}}
+                                                    <div class="relative shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-[rgb(var(--pub-panel-text)/0.10)]">
+                                                        <img :src="insight.image" 
+                                                             :alt="insight.title" 
+                                                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                                    </div>
+    
+                                                    {{-- Text Content --}}
+                                                    <div class="flex-1 min-w-0">
+                                                        <div class="flex items-center justify-between mb-1">
+                                                            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">Latest Insight</span>
+                                                        </div>
+                                                        <h3 class="text-sm font-bold leading-tight mb-1.5 line-clamp-2 text-[rgb(var(--pub-panel-text))]"
+                                                            x-text="insight.title">
+                                                        </h3>
+                                                        <div class="flex items-center gap-2">
+                                                            <span class="text-[10px] text-white" x-text="insight.category"></span>
+                                                            <span class="w-1 h-1 rounded-full bg-[rgb(var(--pub-panel-text)/0.10)]"></span>
+                                                            <span class="text-[10px] text-white" x-text="insight.readTime"></span>
+                                                        </div>
+                                                    </div>
+    
+                                                    {{-- Arrow --}}
+                                                    <div class="shrink-0 flex items-center justify-center w-7 h-7 rounded-full transition-all duration-300 group-hover:bg-accent/10 border border-[rgb(var(--pub-panel-text)/0.05)]">
+                                                        <svg class="w-3 h-3 text-[rgb(var(--pub-panel-text)/0.30)]"
+                                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                                  d="M7 17L17 7M17 7H7M17 7v10"/>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </template>
+                                </div>
+    
+                                {{-- Pagination Dots --}}
+                                <div class="flex justify-start gap-2 mt-4 ml-1">
+                                    <template x-for="(insight, index) in insights" :key="index">
+                                        <button @click="activeSlide = index"
+                                                class="h-1 rounded-full transition-all duration-300"
+                                                :class="activeSlide === index ? 'w-6 bg-accent' : 'w-2 bg-[rgb(var(--pub-panel-text)/0.15)]'">
+                                        </button>
+                                    </template>
+                                </div>
                             </div>
-                            <p class="text-sm font-semibold leading-snug"
-                               style="color: rgba(var(--color-panel-text), 0.88);">
-                                How to build a brand identity system that AI can actually use
-                            </p>
-                            <p class="text-xs mt-2"
-                               style="color: rgba(var(--color-panel-text), 0.40);">
-                                Brand Engineering · 5 min read
-                            </p>
-                        </a>
+                        </div>
 
                     </div>
                     {{-- END KIRI --}}
 
-                    {{-- KANAN: Glass card — Badge + Headline + subheadline + tags + CTA --}}
+                    {{-- KANAN: Glass card --}}
                     <div class="order-1 lg:order-2">
-                        <div class="p-8 lg:p-10 rounded-3xl"
-                             style="background: rgba(var(--color-panel-text), 0.06);
-                                    backdrop-filter: blur(28px);
-                                    -webkit-backdrop-filter: blur(28px);
-                                    border: 1px solid rgba(var(--color-panel-text), 0.13);
-                                    box-shadow: 0 8px 32px rgba(0,0,0,0.18);">
-
-                            {{-- Badge anti-chaos --}}
-                            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-6"
-                                 style="background: rgb(var(--color-primary));
-                                        border: 1px solid rgba(var(--color-primary), 0.30);">
-                                <span class="w-1.5 h-1.5 rounded-full" style="background: white;"></span>
-                                <span class="text-xs font-semibold" style="color: white;">The Anti-Chaos Agency</span>
-                            </div>
-
-                            <h1 class="font-heading font-bold leading-tight text-balance mb-5"
-                                style="font-size:clamp(2rem,5vw,4rem); color:rgb(var(--color-panel-text));">
+                        <div class="p-8 lg:p-10 rounded-3xl bg-[--white-glass] backdrop-blur-[26px] shadow-[0_8px_32px_rgb(0,0,0,0.18)]">
+ 
+                            <h1 class="font-heading font-bold leading-tight text-balance mb-5 text-[clamp(2rem,5vw,4rem)] text-[rgb(var(--pub-panel-text))]">
                                 {{ $hero['hero.headline'] ?? 'Done Right.' }}
-                                <em class="not-italic block" style="color:rgb(var(--color-primary))">
+                                <em class="not-italic block text-accent">
                                     {{ $hero['hero.headline_accent'] ?? 'Done On Time.' }}
                                 </em>
                             </h1>
 
-                            <p class="text-base leading-relaxed mb-7"
-                               style="color: rgba(var(--color-panel-text), 0.75); max-width:38rem;">
+                            <p class="text-white leading-relaxed mb-7 max-w-[38rem]">
                                 {{ $hero['hero.subheadline'] ?? "We are the anti-chaos agency. We bridge the gap between creative disruption and operational excellence. We don't just \"make things\"—we build systems that scale." }}
                             </p>
 
                             {{-- Service tag pills --}}
                             <div class="flex flex-wrap gap-2 mb-8">
                                 @foreach(['Brand Engineering','Tech Development','Growth Hacking','UI/UX Design','Photo & Video','Digital Strategy'] as $tag)
-                                <span style="padding:0.35rem 0.9rem; border-radius:9999px;
-                                             font-size:0.72rem; font-weight:500;
-                                             color: rgba(var(--color-panel-text), 0.80);
-                                             background:rgba(var(--color-panel-text),0.08);
-                                             border:1px solid rgba(var(--color-panel-text),0.16);">
+                                <span class="px-3.5 py-1.5 rounded-full text-[0.72rem] font-medium text-white bg-[rgb(var(--pub-panel-text)/0.08)] border border-[rgb(var(--pub-panel-text)/0.16)]">
                                     {{ $tag }}
                                 </span>
                                 @endforeach
@@ -153,10 +162,7 @@
 
                             {{-- CTA Button --}}
                             <a href="{{ route('contact') }}"
-                               class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm transition-all"
-                               style="background:rgb(var(--color-primary)); color: white;"
-                               onmouseenter="this.style.opacity='0.88'"
-                               onmouseleave="this.style.opacity='1'">
+                               class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm transition-all bg-primary text-white hover:opacity-88">
                                 {{ $hero['hero.cta_primary'] ?? 'Start a Project' }}
                                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -166,6 +172,7 @@
 
                         </div>
                     </div>
+                    {{-- END KANAN --}}
 
                 </div>
             </div>
@@ -173,27 +180,18 @@
 
     </div>
 </section>
-
-
-{{-- ============================================================
-     SERVICES PREVIEW — Obsidian-style 2-column layout
-     Pakai Tailwind classes untuk responsif, tanpa <style> di dalam body
-     ============================================================ --}}
+ 
 <section class="relative overflow-hidden">
-    <div class="flex flex-col lg:flex-row" style="min-height: 65vh;">
+    <div class="flex flex-col lg:flex-row min-h-[65vh]">
 
-        {{-- KIRI: Deskripsi + pill tags — background halaman biasa --}}
-        <div class="w-full lg:w-5/12 flex flex-col justify-center px-8 py-16 lg:px-16 xl:px-20 lg:py-20"
-             style="background: rgb(var(--color-background));">
+        {{-- KIRI: Deskripsi + pill tags --}}
+        <div class="w-full lg:w-5/12 flex flex-col justify-center px-8 py-16 lg:px-16 xl:px-20 lg:py-20 bg-[rgb(var(--pub-bg))]">
 
-            <p class="text-xs font-bold uppercase tracking-widest mb-6"
-               style="color: rgb(var(--color-primary)); letter-spacing: 0.12em;">Services</p>
+            <p class="text-xs font-bold uppercase tracking-widest mb-6 text-primary tracking-[0.12em]">Services</p>
 
-            <p class="font-medium leading-relaxed mb-10 text-balance"
-               style="font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1.6;
-                      color: rgb(var(--color-foreground));">
+            <p class="font-medium leading-relaxed mb-10 text-balance text-[clamp(1.1rem,2vw,1.5rem)] leading-[1.6] text-[rgb(var(--pub-fg))]">
                 We don't just specialize in our services; we are experts in the
-                <em style="font-style: italic; color: rgb(var(--color-primary))">businesses</em>
+                <em class="italic text-primary">businesses</em>
                 of our clients. Fully tested, fully optimized, ready for market impact.
             </p>
 
@@ -203,22 +201,16 @@
                           'Tech Development','Web Apps','Custom Software',
                           'Growth Hacking','SEO & SEM','Data-Driven Marketing',
                           'Photo & Video','Content Creation'] as $tag)
-                <span class="px-3.5 py-1.5 rounded-full text-xs font-medium"
-                      style="background: rgba(var(--color-muted), 0.50);
-                             border: 1px solid rgba(var(--color-border), 0.65);
-                             color: rgb(var(--color-foreground));">
+                <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-[rgb(var(--pub-muted)/0.50)] border border-[rgb(var(--pub-border)/0.65)] text-[rgb(var(--pub-fg))]">
                     {{ $tag }}
                 </span>
                 @endforeach
             </div>
         </div>
+ 
+        <div class="w-full lg:w-7/12 flex flex-col justify-center px-8 py-16 lg:px-16 xl:px-20 lg:py-20 bg-[rgb(var(--pub-panel-dark))]">
 
-        {{-- KANAN: Service list accordion — selalu gelap (panel-dark) --}}
-        <div class="w-full lg:w-7/12 flex flex-col justify-center px-8 py-16 lg:px-16 xl:px-20 lg:py-20"
-             style="background: rgb(var(--color-panel-dark));">
-
-            <p class="text-xs font-bold uppercase tracking-widest mb-8"
-               style="color: rgba(var(--color-panel-text), 0.35); letter-spacing: 0.12em;">What We Do</p>
+            <p class="text-xs font-bold uppercase tracking-widest mb-8 text-white tracking-[0.12em]">What We Do</p>
 
             @php
                 $serviceList = (isset($services) && $services->count())
@@ -234,19 +226,11 @@
             <div>
                 @foreach($serviceList as $svc)
                 <a href="{{ route('services') }}#{{ $svc['anchor'] }}"
-                   class="services-list-row flex items-center justify-between py-5"
-                   style="border-bottom: 1px solid rgba(var(--color-panel-text), 0.09);
-                          text-decoration: none;">
-                    <span class="services-list-title font-heading font-semibold"
-                          style="font-size: clamp(1.05rem, 1.8vw, 1.4rem);
-                                 color: rgb(var(--color-panel-text));
-                                 transition: color 0.2s;">
+                   class="services-row flex items-center justify-between py-5 no-underline">
+                    <span class="services-title font-heading font-semibold text-[clamp(1.05rem,1.8vw,1.4rem)]">
                         {{ $svc['title'] }}
                     </span>
-                    <svg class="services-list-arrow shrink-0 ml-5"
-                         style="width: 1.25rem; height: 1.25rem;
-                                color: rgba(var(--color-panel-text), 0.30);
-                                transition: transform 0.2s, color 0.2s;"
+                    <svg class="services-arrow shrink-0 ml-5 w-5 h-5"
                          fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -256,11 +240,9 @@
             </div>
 
             <a href="{{ route('services') }}"
-               class="services-viewall inline-flex items-center gap-2 mt-8 text-sm font-medium"
-               style="color: rgba(var(--color-panel-text), 0.40); text-decoration: none;
-                      transition: color 0.2s;">
+               class="inline-flex items-center gap-2 mt-8 text-sm font-medium text-white no-underline transition-colors hover:text-[rgb(var(--pub-panel-text))]">
                 View all services
-                <svg style="width: 1rem; height: 1rem; flex-shrink: 0;"
+                <svg class="w-4 h-4 shrink-0"
                      fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -271,31 +253,6 @@
     </div>
 </section>
 
-@push('scripts')
-<script>
-(function () {
-    document.querySelectorAll('.services-list-row').forEach(function (row) {
-        var title = row.querySelector('.services-list-title');
-        var arrow = row.querySelector('.services-list-arrow');
-        row.addEventListener('mouseenter', function () {
-            title.style.color = 'rgb(var(--color-accent))';
-            arrow.style.color = 'rgb(var(--color-accent))';
-            arrow.style.transform = 'translateX(8px)';
-        });
-        row.addEventListener('mouseleave', function () {
-            title.style.color = 'rgb(var(--color-panel-text))';
-            arrow.style.color = 'rgba(var(--color-panel-text), 0.30)';
-            arrow.style.transform = 'translateX(0)';
-        });
-    });
-    document.querySelectorAll('.services-viewall').forEach(function (a) {
-        a.addEventListener('mouseenter', function () { a.style.color = 'rgb(var(--color-panel-text))'; });
-        a.addEventListener('mouseleave', function () { a.style.color = 'rgba(var(--color-panel-text), 0.40)'; });
-    });
-})();
-</script>
-@endpush
-
 
 {{-- ============================================================
      ABOUT PREVIEW
@@ -304,20 +261,15 @@
     <div class="container mx-auto px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            {{-- Visual: aspect-[4/5] rounded-3xl overflow-hidden --}}
+            {{-- Visual --}}
             <div class="relative">
-                <div class="relative rounded-3xl overflow-hidden"
-                     style="aspect-ratio: 4/5; background: rgba(var(--color-muted), 0.30)">
+                <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-[rgb(var(--pub-muted)/0.30)]">
                     <img src="https://picsum.photos/seed/office-team/600/750"
                          alt="ASAK Agency Team"
                          class="absolute inset-0 w-full h-full object-cover">
 
-                    {{-- Glass overlay card: absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-background/70 backdrop-blur-xl --}}
-                    <div class="absolute bottom-6 left-6 right-6 p-6 rounded-2xl"
-                         style="background: rgba(var(--color-background), 0.70);
-                                backdrop-filter: blur(24px);
-                                -webkit-backdrop-filter: blur(24px);
-                                border: 1px solid rgba(var(--color-border), 0.50);">
+                    {{-- Glass overlay card --}}
+                    <div class="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-[var(--white-glass)] backdrop-blur-[26x]">
                         <div class="flex items-center gap-4">
                             {{-- Stacked avatars --}}
                             <div class="flex">
@@ -325,43 +277,41 @@
                                     @foreach($team->take(4) as $member)
                                     <img src="{{ $member->image_url }}"
                                          alt="{{ $member->name }}"
-                                         class="w-10 h-10 rounded-full object-cover"
-                                         style="border: 2px solid rgb(var(--color-background)); {{ $loop->first ? '' : 'margin-left: -12px;' }}">
+                                         class="w-10 h-10 rounded-full object-cover border-2 border-[rgb(var(--pub-bg))]"
+                                         style="{{ $loop->first ? '' : 'margin-left: -12px;' }}">
                                     @endforeach
                                 @else
                                     @foreach(['a','b','c','d'] as $si => $seed)
                                     <img src="https://picsum.photos/seed/comrade-{{ $seed }}/40/40"
                                          alt="Team member"
-                                         class="w-10 h-10 rounded-full object-cover"
-                                         style="border: 2px solid rgb(var(--color-background)); {{ $si === 0 ? '' : 'margin-left: -12px;' }}">
+                                         class="w-10 h-10 rounded-full object-cover border-2 border-[rgb(var(--pub-bg))]"
+                                         style="{{ $si === 0 ? '' : 'margin-left: -12px;' }}">
                                     @endforeach
                                 @endif
                             </div>
                             <div>
-                                <p class="font-semibold" style="color: rgb(var(--color-foreground))">Meet the Comrades</p>
-                                <p class="text-sm" style="color: rgb(var(--color-muted-foreground))">Your dedicated digital partners</p>
+                                <p class="font-semibold text-[rgb(var(--pub-fg))]">Meet the Comrades</p>
+                                <p class="text-sm text-[rgb(var(--pub-muted-fg))]">Your dedicated digital partners</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Decorative: absolute -bottom-6 -right-6 w-32 h-32 rounded-3xl bg-primary/10 -z-10 --}}
-                <div class="absolute w-32 h-32 rounded-3xl"
-                     style="background: rgba(var(--color-primary), 0.10); bottom: -24px; right: -24px; z-index: -1;"></div>
+                {{-- Decorative blob --}}
+                <div class="absolute w-32 h-32 rounded-3xl bg-[rgb(var(--pub-primary)/0.10)] -bottom-6 -right-6 -z-10"></div>
             </div>
 
             {{-- Content --}}
             <div>
-                <p class="font-medium mb-3" style="color: rgb(var(--color-primary))">About Us</p>
-                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-balance"
-                    style="color: rgb(var(--color-foreground))">
+                <p class="font-medium mb-3 text-primary">About Us</p>
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-balance text-[rgb(var(--pub-fg))]">
                     {{ $about['about.philosophy'] ?? '"Asak" Means Mature. Ready.' }}
                 </h2>
-                <p class="text-lg leading-relaxed mb-8" style="color: rgb(var(--color-muted-foreground))">
+                <p class="text-lg leading-relaxed mb-8 text-[rgb(var(--pub-muted-fg))]">
                     {{ $about['about.story_text_2'] ?? "We believe that great ideas are worthless if they remain \"raw\" or poorly executed. At asak digital, we bridge the gap between abstract concepts and concrete reality. We don't just deliver projects; we deliver maturity—fully tested, fully optimized, and ready for market impact." }}
                 </p>
 
-                {{-- Highlights: flex items-center gap-3, circle icon glass, CheckCircle text-primary --}}
+                {{-- Highlights --}}
                 <ul class="space-y-4 mb-10">
                     @php
                         $highlights = [
@@ -373,27 +323,21 @@
                     @endphp
                     @foreach($highlights as $item)
                     <li class="flex items-center gap-3">
-                        <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
-                             style="background: rgba(var(--color-background), 0.60);
-                                    backdrop-filter: blur(24px);
-                                    -webkit-backdrop-filter: blur(24px);
-                                    border: 1px solid rgba(var(--color-border), 0.50);">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center shrink-0 bg-[rgb(var(--pub-bg)/0.60)] backdrop-blur-[24px] border border-[rgb(var(--pub-border)/0.50)]">
                             {{-- CheckCircle icon --}}
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 style="color: rgb(var(--color-primary))">
+                            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <span style="color: rgb(var(--color-foreground))">{{ $item }}</span>
+                        <span class="text-[rgb(var(--pub-fg))]">{{ $item }}</span>
                     </li>
                     @endforeach
                 </ul>
 
-                {{-- CTA: size lg = h-10 rounded-full px-8 --}}
+                {{-- CTA --}}
                 <a href="{{ route('about') }}"
-                   class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90"
-                   style="background: rgb(var(--color-primary)); color: rgb(var(--color-primary-foreground));">
+                   class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90 bg-primary text-[rgb(var(--pub-primary-fg))]">
                     Learn More About Us
                     <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -406,24 +350,19 @@
 </section>
 
 
-{{-- ============================================================
-     PORTFOLIO PREVIEW
-     ============================================================ --}}
+ 
 @if($portfolios->count())
-<section class="py-20 lg:py-32" style="background: rgba(var(--color-muted), 0.30)">
+<section class="py-20 lg:py-32 bg-[rgb(var(--pub-muted)/0.30)]">
     <div class="container mx-auto px-6 lg:px-8">
 
         {{-- Header --}}
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
             <div>
-                <p class="font-medium mb-3" style="color: rgb(var(--color-primary))">Our Work</p>
-                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-balance"
-                    style="color: rgb(var(--color-foreground))">Selected Projects</h2>
+                <p class="font-medium mb-3 text-primary">Our Work</p>
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-balance text-[rgb(var(--pub-fg))]">Selected Projects</h2>
             </div>
             <a href="{{ route('portfolio') }}"
-               class="inline-flex items-center gap-2 font-medium transition-all"
-               style="color: rgb(var(--color-primary))"
-               onmouseenter="this.style.gap='12px'" onmouseleave="this.style.gap=''">
+               class="inline-flex items-center gap-2 font-medium transition-all text-primary hover:gap-3">
                 View All Projects
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -431,32 +370,23 @@
             </a>
         </div>
 
-        {{-- Equal 3 columns, aspect-[4/3] --}}
+        {{-- Grid portfolio --}}
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($portfolios as $project)
             <a href="{{ route('portfolio') }}#{{ $project->slug }}"
-               class="portfolio-card group relative rounded-3xl overflow-hidden transition-all duration-300"
-               style="background: rgba(var(--color-background), 0.60);
-                      backdrop-filter: blur(24px);
-                      -webkit-backdrop-filter: blur(24px);
-                      border: 1px solid rgba(var(--color-border), 0.50);
-                      display: block;
-                      text-decoration: none;">
+               class="group block relative rounded-3xl overflow-hidden bg-[rgb(var(--pub-bg)/0.60)] backdrop-blur-[24px] border border-[rgb(var(--pub-border)/0.50)] no-underline transition-all duration-300">
 
-                {{-- Image: aspect-[4/3] --}}
-                <div class="relative overflow-hidden" style="aspect-ratio: 4/3; background: rgba(var(--color-muted), 0.30)">
+                {{-- Image --}}
+                <div class="relative overflow-hidden aspect-[4/3] bg-[rgb(var(--pub-muted)/0.30)]">
                     <img src="{{ $project->image_url }}"
                          alt="{{ $project->title }}"
                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
 
-                    {{-- Hover overlay: bg-foreground/80 + ArrowUpRight in primary circle --}}
-                    <div class="portfolio-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-300"
-                         style="background: rgba(var(--color-foreground), 0.80); opacity: 0;">
-                        <div class="w-14 h-14 rounded-full flex items-center justify-center"
-                             style="background: rgb(var(--color-primary));">
+                    {{-- Hover overlay --}}
+                    <div class="portfolio-overlay absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 group-hover:opacity-100 bg-[rgb(var(--pub-fg)/0.80)]">
+                        <div class="w-14 h-14 rounded-full flex items-center justify-center bg-primary">
                             {{-- ArrowUpRight --}}
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                 style="color: rgb(var(--color-primary-foreground))">
+                            <svg class="w-6 h-6 text-[rgb(var(--pub-primary-fg))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10"/>
                             </svg>
                         </div>
@@ -465,13 +395,13 @@
 
                 {{-- Content --}}
                 <div class="p-6">
-                    <p class="text-sm font-medium mb-2" style="color: rgb(var(--color-primary))">
+                    <p class="text-sm font-medium mb-2 text-primary">
                         {{ $project->category }}
                     </p>
-                    <h3 class="font-heading text-xl font-semibold mb-2" style="color: rgb(var(--color-foreground))">
+                    <h3 class="font-heading text-xl font-semibold mb-2 text-[rgb(var(--pub-fg))]">
                         {{ $project->title }}
                     </h3>
-                    <p class="text-sm" style="color: rgb(var(--color-muted-foreground))">
+                    <p class="text-sm text-[rgb(var(--pub-muted-fg))]">
                         {{ $project->client ?? $project->description }}
                     </p>
                 </div>
@@ -489,41 +419,29 @@
 <section class="py-20 lg:py-32">
     <div class="container mx-auto px-6 lg:px-8">
 
-        {{-- Card wrapper — matches Next.js: foreground/95% bg + backdrop-blur --}}
-        <div class="relative rounded-3xl overflow-hidden relative rounded-3xl bg-foreground/95 backdrop-blur-xl border border-foreground/20 overflow-hidden"
-             style="background: rgba(var(--color-foreground), 0.95);
-                    backdrop-filter: blur(24px);
-                    -webkit-backdrop-filter: blur(24px);
-                    border: 1px solid rgba(var(--color-primary), 0.20);">
+        {{-- Card wrapper --}}
+        <div class="cta-card rounded-3xl">
 
-            {{-- Background decoration — ring-colored glass gradient (matches Next.js) --}}
-            <div class="absolute inset-0" style="pointer-events:none; overflow:hidden;">
-                {{-- Full radial gradient overlay --}}
-                <div class="absolute inset-0"
-                     style="background: radial-gradient(ellipse at 70% 50%, rgba(var(--color-primary), 0.50), transparent 70%)"></div>
+            {{-- Background decoration --}}
+            <div class="cta-gradient">
                 {{-- Top-right blob --}}
-                <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl"
-                     style="background: rgba(var(--color-accent), 0.30)"></div>
+                <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl bg-[rgb(var(--pub-accent)/0.30)]"></div>
                 {{-- Bottom-left blob --}}
-                <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl"
-                     style="background: rgba(var(--color-accent), 0.15)"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl bg-[rgb(var(--pub-accent)/0.15)]"></div>
             </div>
 
             {{-- Content --}}
-            <div class="relative py-16 lg:py-24 px-8 lg:px-16 text-center" style="z-index:10">
-                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto text-balance"
-                    style="color: rgb(var(--color-primary))">
+            <div class="relative py-16 lg:py-24 px-8 lg:px-16 text-center z-10">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto text-balance text-accent">
                     Let's Build Something Mature.
                 </h2>
-                <p class="text-lg max-w-2xl mx-auto mb-10"
-                   style="color: rgba(var(--color-background), 0.70)">
+                <p class="text-lg max-w-2xl mx-auto mb-10 text-white">
                     Most agencies sell dreams but deliver nightmares. You deserve a partner who treats your business with military precision. Ready to experience the difference?
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    {{-- Primary: bg-background text-primary (cream button, maroon text) --}}
+                    {{-- Primary --}}
                     <a href="{{ route('contact') }}"
-                       class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90"
-                       style="background: rgb(var(--color-background)); color: rgb(var(--color-primary));">
+                       class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90 bg-[rgb(var(--pub-bg))] text-primary">
                         Start a Conversation
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
@@ -531,12 +449,7 @@
                     </a>
                     {{-- Outline --}}
                     <a href="{{ route('portfolio') }}"
-                       class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all"
-                       style="background: transparent;
-                              border: 1px solid rgba(var(--color-background), 0.30);
-                              color: rgb(var(--color-background));"
-                       onmouseenter="this.style.background='rgba(var(--color-background), 0.10)'"
-                       onmouseleave="this.style.background='transparent'">
+                       class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all bg-transparent border border-[rgb(var(--pub-bg)/0.30)] text-[rgb(var(--pub-bg))] hover:bg-[rgb(var(--pub-bg)/0.10)]">
                         Explore Our Work
                     </a>
                 </div>

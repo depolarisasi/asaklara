@@ -8,11 +8,10 @@
     <div class="container mx-auto px-6 lg:px-8">
         <div class="max-w-4xl">
             <p class="text-primary font-medium mb-4">Meet asak digital</p>
-            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance"
-                style="color: rgb(var(--color-foreground))">
+            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance text-[rgb(var(--pub-fg))]">
                 {{ $about['about.hero_title'] ?? 'The Anti-Chaos Agency' }}
             </h1>
-            <p class="text-xl leading-relaxed" style="color: rgb(var(--color-muted-foreground))">
+            <p class="text-xl leading-relaxed text-[rgb(var(--pub-muted-fg))]">
                 {{ $about['about.hero_subtitle'] ?? 'Born from the high-volume demands of the global gig economy and refined for corporate scalability, we bridge the gap between creative disruption and operational excellence.' }}
             </p>
         </div>
@@ -20,22 +19,21 @@
 </section>
 
 {{-- Story Section --}}
-<section class="py-20 lg:py-32" style="background: rgba(var(--color-muted), 0.3)">
+<section class="py-20 lg:py-32 bg-[rgba(var(--pub-muted),0.3)]">
     <div class="container mx-auto px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div class="relative">
                 <div class="aspect-[4/3] rounded-3xl overflow-hidden">
                     <img src="https://picsum.photos/seed/agency-story/800/600" alt="ASAK Agency Story" class="w-full h-full object-cover">
                 </div>
-                <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-3xl -z-10" style="background: rgba(var(--color-primary), 0.1)"></div>
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-3xl -z-10 bg-[rgba(var(--pub-primary),0.1)]"></div>
             </div>
             <div>
                 <p class="text-primary font-medium mb-3">Our Philosophy</p>
-                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-6"
-                    style="color: rgb(var(--color-foreground))">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-6 text-[rgb(var(--pub-fg))]">
                     {{ $about['about.philosophy'] ?? '"Asak" Means Mature. Ready.' }}
                 </h2>
-                <div class="space-y-4 leading-relaxed" style="color: rgb(var(--color-muted-foreground))">
+                <div class="space-y-4 leading-relaxed text-[rgb(var(--pub-muted-fg))]">
                     <p>{{ $about['about.story_text_1'] ?? 'It represents the final state of perfection after a rigorous process. In the digital world, "Asak" is our Definition of Done.' }}</p>
                     <p>{{ $about['about.story_text_2'] ?? 'We believe that great ideas are worthless if they remain "raw" or poorly executed. At asak digital, we bridge the gap between abstract concepts and concrete reality.' }}</p>
                     <p>{{ $about['about.story_text_3'] ?? "We don't just deliver projects; we deliver maturity—fully tested, fully optimized, and ready for market impact." }}</p>
@@ -50,9 +48,8 @@
     <div class="container mx-auto px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <p class="text-primary font-medium mb-3">Why Us?</p>
-            <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4"
-                style="color: rgb(var(--color-foreground))">What Sets Us Apart</h2>
-            <p style="color: rgb(var(--color-muted-foreground))">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4 text-[rgb(var(--pub-fg))]">What Sets Us Apart</h2>
+            <p class="text-[rgb(var(--pub-muted-fg))]">
                 Most agencies sell dreams but deliver nightmares. Missed deadlines, ghosting, and "raw" results are the industry standard. You deserve better.
             </p>
         </div>
@@ -68,8 +65,8 @@
             @endphp
 
             @foreach($coreValues as $val)
-            <div class="p-8 rounded-3xl bg-background/60 backdrop-blur-xl border border-border/50 text-center hover:shadow-lg hover:bg-background/80 transition-all">
-                <div class="w-14 h-14 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/50 flex items-center justify-center mx-auto mb-6">
+            <div class="p-8 rounded-3xl bg-[rgba(var(--pub-bg),0.60)] backdrop-blur-xl border border-[rgba(var(--pub-border),0.50)] text-center hover:shadow-lg hover:bg-[rgba(var(--pub-bg),0.80)] transition-all">
+                <div class="w-14 h-14 rounded-2xl bg-[rgba(var(--pub-bg),0.60)] backdrop-blur-xl border border-[rgba(var(--pub-border),0.50)] flex items-center justify-center mx-auto mb-6">
                     <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         @if($val['icon'] === 'target')
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -82,9 +79,8 @@
                         @endif
                     </svg>
                 </div>
-                <h3 class="font-heading text-xl font-semibold mb-3"
-                    style="color: rgb(var(--color-foreground))">{{ $val['title'] }}</h3>
-                <p class="text-sm leading-relaxed" style="color: rgb(var(--color-muted-foreground))">{{ $val['desc'] }}</p>
+                <h3 class="font-heading text-xl font-semibold mb-3 text-[rgb(var(--pub-fg))]">{{ $val['title'] }}</h3>
+                <p class="text-sm leading-relaxed text-[rgb(var(--pub-muted-fg))]">{{ $val['desc'] }}</p>
             </div>
             @endforeach
         </div>
@@ -93,25 +89,23 @@
 
 {{-- Team --}}
 @if($team->count())
-<section class="py-20 lg:py-32" style="background: rgba(var(--color-muted), 0.3)">
+<section class="py-20 lg:py-32 bg-[rgba(var(--pub-muted),0.3)]">
     <div class="container mx-auto px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <p class="text-primary font-medium mb-3">Our Team</p>
-            <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4"
-                style="color: rgb(var(--color-foreground))">Meet the "Comrades"</h2>
-            <p style="color: rgb(var(--color-muted-foreground))">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4 text-[rgb(var(--pub-fg))]">Meet the "Comrades"</h2>
+            <p class="text-[rgb(var(--pub-muted-fg))]">
                 Our diverse team brings together expertise from various disciplines to deliver exceptional results.
             </p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach($team as $member)
-            <div class="p-8 rounded-3xl bg-background/60 backdrop-blur-xl border border-border/50 text-center hover:shadow-lg hover:bg-background/80 transition-all">
+            <div class="p-8 rounded-3xl bg-[rgba(var(--pub-bg),0.60)] backdrop-blur-xl border border-[rgba(var(--pub-border),0.50)] text-center hover:shadow-lg hover:bg-[rgba(var(--pub-bg),0.80)] transition-all">
                 <img src="{{ $member->image_url }}" alt="{{ $member->name }}"
                      class="w-24 h-24 rounded-full object-cover mx-auto mb-6">
-                <h3 class="font-heading text-lg font-semibold mb-1"
-                    style="color: rgb(var(--color-foreground))">{{ $member->name }}</h3>
-                <p class="text-sm" style="color: rgb(var(--color-muted-foreground))">{{ $member->role }}</p>
+                <h3 class="font-heading text-lg font-semibold mb-1 text-[rgb(var(--pub-fg))]">{{ $member->name }}</h3>
+                <p class="text-sm text-[rgb(var(--pub-muted-fg))]">{{ $member->role }}</p>
             </div>
             @endforeach
         </div>
@@ -133,7 +127,7 @@
                 <p class="font-heading text-4xl lg:text-5xl font-bold text-primary mb-2">
                     {{ $stats[$stat['key']] ?? $stat['default'] }}
                 </p>
-                <p style="color: rgb(var(--color-muted-foreground))">{{ $stat['label'] }}</p>
+                <p class="text-[rgb(var(--pub-muted-fg))]">{{ $stat['label'] }}</p>
             </div>
             @endforeach
         </div>

@@ -17,7 +17,22 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                // ASAK Agency brand colors via CSS variables (RGB triplet)
+                // ASAK Agency brand colors via CSS variables
+                asak: {
+                    gold: 'var(--color-asak-gold)',
+                    'gold-hover': 'var(--color-asak-gold-hover)',
+                    'gold-muted': 'var(--color-asak-gold-muted)',
+                },
+                admin: {
+                    bg: 'var(--admin-bg)',
+                    sidebar: 'var(--admin-sidebar)',
+                    card: 'var(--admin-card)',
+                    border: 'var(--admin-border)',
+                    'border-muted': 'var(--admin-border-muted)',
+                    text: 'var(--admin-text)',
+                    'text-muted': 'var(--admin-text-muted)',
+                    'text-dim': 'var(--admin-text-dim)',
+                },
                 primary: {
                     DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
                     foreground: 'rgb(var(--color-primary-foreground) / <alpha-value>)',

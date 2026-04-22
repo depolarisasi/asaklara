@@ -1,8 +1,21 @@
 # Active Context — ASAK Agency Website
 
-## Status Session: 2026-04-15
+## Status Session: 2026-04-21 (Update: Restorasi Estetika Premium)
 
 ## Pekerjaan yang Baru Diselesaikan
+
+### Restorasi Hero Section & Unifikasi Navigasi
+1.  **Unifikasi Navbar** — Menggabungkan dua kontainer *pill* (kiri & kanan) menjadi satu kontainer navigasi terpusat yang lebih rapi dan responsif.
+2.  **Restorasi Hero Grid 50/50** — Mengembalikan struktur grid asli yang membagi area statistik/insight dan headline secara seimbang (50/50) untuk estetika premium.
+3.  **Refinement Glassmorphism** — Memperbaiki kontras dan efek blur pada kartu stats dan insight agar lebih "pop" di atas latar belakang gelap.
+4.  **Optimasi Aset CSS** — Memindahkan logika desain kompleks (gradient, blur, spacer) ke dalam kelas utilitas di `app.css` untuk kemudahan pemeliharaan.
+5.  **Perbaikan Kontras Teks** — Memastikan teks aksen (warna gold/orange) terbaca dengan jelas di mode gelap.
+
+### Halaman Home (Fitur Baru & Perbaikan)
+6.  **Latest Insight Carousel** — Komponen bergaya blog bergulir di hero section dengan transisi Alpine.js.
+2.  **AI Thumbnail Generation** — Membuat asset `insight-ai-brand.png` menggunakan AI untuk visualisasi identitas brand masa depan.
+3.  **Micro-interactions** — Menambahkan transisi hover (zoom thumbnail, glassmorphism glow, dan shadow lift) untuk meningkatkan *user engagement*.
+4.  **Response Cache Clear** — Menjalankan pembersihan cache untuk memastikan perubahan instan di halaman publik.
 
 ### Bug Fixes (CRUD Admin)
 1. **Portfolio/Form.vue** — Fix boolean `active`/`featured` dikirim sebagai `'true'`/`'false'` string lewat FormData. Fix: gunakan `? '1' : '0'`
