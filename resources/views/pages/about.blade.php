@@ -134,4 +134,39 @@
     </div>
 </section>
 
+{{-- Client Logos --}}
+<section class="py-12 border-t border-[rgba(var(--pub-border),0.50)] bg-[rgba(var(--pub-muted),0.1)] overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-8">
+        <p class="text-center text-sm font-medium text-[rgb(var(--pub-muted-fg))] mb-8 uppercase tracking-wider">Trusted by Industry Leaders</p>
+        <div class="owl-carousel client-carousel flex items-center">
+            @foreach($clients as $client)
+            <div class="flex items-center justify-center p-4 opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
+                <img src="{{ $client->logo_url }}" alt="{{ $client->name }}" class="max-h-12 w-auto object-contain">
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $(".client-carousel").owlCarousel({
+            loop: true,
+            margin: 40,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive:{
+                0:{ items:2 },
+                576:{ items:3 },
+                768:{ items:4 },
+                1024:{ items:5 }
+            }
+        });
+    });
+</script>
+@endpush

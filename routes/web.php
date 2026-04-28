@@ -67,6 +67,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::patch('submissions/{submission}/read', [ContactSubmissionController::class, 'markRead'])->name('submissions.read');
     Route::delete('submissions/{submission}', [ContactSubmissionController::class, 'destroy'])->name('submissions.destroy');
 
+    // Clients
+    Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class)->except(['show']);
+    Route::get('clients-trash', [\App\Http\Controllers\Admin\ClientController::class, 'trash'])->name('clients.trash');
+    Route::patch('clients/{id}/restore', [\App\Http\Controllers\Admin\ClientController::class, 'restore'])->name('clients.restore');
+    Route::delete('clients/{id}/force-delete', [\App\Http\Controllers\Admin\ClientController::class, 'forceDelete'])->name('clients.force-delete');
+
     // Settings
     Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');

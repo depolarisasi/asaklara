@@ -262,6 +262,11 @@ html:not(.light) {
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgb(var(--pub-panel-text) / 0.1);
     }
 
+    html:not(.light) .cta-card {
+        background: rgb(var(--pub-bg) / 0.95);
+        border: none;
+    }
+
     .cta-gradient {
         position: absolute;
         inset: 0;

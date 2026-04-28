@@ -63,8 +63,7 @@
         <div class="mt-24 pt-8 border-t border-[rgba(var(--pub-panel-text),0.05)] flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-[10px] text-[rgba(var(--pub-panel-text),0.3)]">
                 &copy; {{ date('Y') }} ASAK Agency. All rights reserved. 
-                <span class="mx-2 hidden md:inline">|</span> 
-                The Anti-Chaos Agency.
+                 
             </p>
             <div class="flex items-center gap-6">
                 {{-- Social Icons if needed, though mockup was very clean --}}

@@ -206,27 +206,27 @@ reach
         <div class="cta-card rounded-3xl">
 
             <div class="cta-gradient">
-                <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl bg-[rgba(var(--pub-primary),0.30)]"></div>
-                <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl bg-[rgba(var(--pub-primary),0.15)]"></div>
+                <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl bg-[rgb(var(--pub-accent)/0.30)]"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl bg-[rgb(var(--pub-accent)/0.15)]"></div>
             </div>
 
             <div class="relative py-16 lg:py-24 px-8 lg:px-16 text-center z-10">
-                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto text-balance text-[rgb(var(--pub-bg))]">
+                <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 max-w-3xl mx-auto text-balance text-accent">
                     Ready to Build Something Mature?
                 </h2>
-                <p class="text-lg max-w-2xl mx-auto mb-10 text-[rgba(var(--pub-bg),0.70)]">
+                <p class="text-lg max-w-2xl mx-auto mb-10 text-white">
                     Most agencies sell dreams but deliver nightmares. You deserve a partner who treats your business with military precision. Ready to experience the difference?
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('contact') }}"
-                       class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full text-sm font-semibold transition-all hover:opacity-90 bg-[rgb(var(--pub-bg))] text-primary">
+                       class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90 bg-[rgb(var(--pub-bg))] text-primary">
                         Start a Conversation
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
                     <a href="{{ route('portfolio') }}"
-                       class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full text-sm font-medium transition-all bg-transparent border border-[rgba(var(--pub-bg),0.30)] text-[rgb(var(--pub-bg))] hover:bg-[rgba(var(--pub-bg),0.10)]">
+                       class="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full text-sm font-medium transition-all bg-transparent border border-white/30 text-white hover:bg-white/10">
                         Explore Our Work
                     </a>
                 </div>

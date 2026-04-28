@@ -21,7 +21,7 @@
             <div style="text-align: center; margin-bottom: 32px;">
                 <div style="width: 48px; height: 48px; background: #b8960c; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 800; font-size: 20px; color: white;">A</div>
                 <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; margin: 0 0 4px;">asak<span style="color: #b8960c">digital</span></h1>
-                <p style="font-size: 13px; color: #6b7280; margin: 0;">Admin Panel — Anti-Chaos CMS</p>
+ 
             </div>
 
             @if(session('status'))
@@ -56,6 +56,11 @@
                         <input type="checkbox" name="remember" style="accent-color: #b8960c;">
                         Remember me
                     </label>
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}" style="font-size: 13px; color: #b8960c; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+                            Lupa password?
+                        </a>
+                    @endif
                 </div>
 
                 <button type="submit"

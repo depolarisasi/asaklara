@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             ProcessStepSeeder::class,
             PortfolioSeeder::class,
+            ClientSeeder::class,
         ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\TeamMember;
+use App\Models\Client;
 
 class HomeController extends Controller
 {
@@ -20,7 +21,8 @@ class HomeController extends Controller
         $stats  = Setting::getGroup('stats');
         $about  = Setting::getGroup('about');
         $team   = TeamMember::active()->take(4)->get();
+        $clients = Client::active()->get();
 
-        return view('pages.home', compact('hero', 'services', 'portfolios', 'stats', 'about', 'team'));
+        return view('pages.home', compact('hero', 'services', 'portfolios', 'stats', 'about', 'team', 'clients'));
     }
 }
