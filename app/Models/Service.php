@@ -13,6 +13,8 @@ class Service extends Model
 
     protected $fillable = ['title', 'slug', 'description', 'image', 'order', 'active'];
 
+    protected $appends = ['image_url'];
+
     protected $casts = [
         'active' => 'boolean',
         'order' => 'integer',

@@ -12,6 +12,8 @@ class Client extends Model
 
     protected $fillable = ['name', 'image_url', 'is_active', 'sort_order'];
 
+    protected $appends = ['logo_url'];
+
     protected $casts = [
         'is_active' => 'boolean',
         'sort_order' => 'integer',

@@ -16,6 +16,8 @@ class Portfolio extends Model
         'year', 'category', 'image', 'featured', 'order', 'active'
     ];
 
+    protected $appends = ['image_url'];
+
     protected $casts = [
         'featured' => 'boolean',
         'active' => 'boolean',

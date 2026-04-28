@@ -12,6 +12,8 @@ class TeamMember extends Model
 
     protected $fillable = ['name', 'role', 'image', 'order', 'active'];
 
+    protected $appends = ['image_url'];
+
     protected $casts = [
         'active' => 'boolean',
         'order' => 'integer',

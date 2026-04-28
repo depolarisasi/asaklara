@@ -43,7 +43,7 @@
                 class="transition-colors hover:bg-white/5 border-b border-admin-border-muted">
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <img :src="item.image || `https://picsum.photos/seed/${item.slug}/60/60`"
+                  <img :src="item.image_url"
                        class="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
                   <div>
                     <p class="font-medium text-sm">{{ item.title }}</p>

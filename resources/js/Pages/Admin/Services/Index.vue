@@ -23,7 +23,7 @@
       <div class="space-y-4">
         <div v-for="svc in services" :key="svc.id"
              class="rounded-2xl p-5 flex items-start gap-4 bg-admin-card border border-admin-border">
-          <img :src="svc.image_url || svc.image || `https://picsum.photos/seed/${svc.slug}/80/80`"
+          <img :src="svc.image_url"
                class="w-16 h-16 rounded-xl object-cover flex-shrink-0" />
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 mb-1">
