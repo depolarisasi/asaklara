@@ -1,28 +1,28 @@
 <template>
-  <div class="min-h-screen bg-admin-bg text-admin-text font-sans">
+  <div class="min-h-screen bg-admin-bg text-admin-text font-body">
 
     <!-- Sidebar -->
     <aside :class="['fixed inset-y-0 left-0 z-50 w-64 transition-transform duration-300 bg-admin-sidebar border-r border-admin-border', sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0']">
 
       <!-- Logo -->
       <div class="flex items-center gap-3 px-6 h-16 border-b border-admin-border">
-        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-white text-sm bg-asak-gold">A</div>
-        <div>
-          <span class="font-bold text-sm text-admin-text">asak</span><span class="font-bold text-sm text-asak-gold">digital</span>
-          <p class="text-xs text-admin-text-muted">Admin Panel</p>
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-heading font-bold text-[#0A1520] text-sm bg-asak-gold">A</div>
+        <div class="font-heading">
+          <span class="font-bold text-sm tracking-tight text-admin-text">asak</span><span class="font-bold text-sm tracking-tight text-asak-gold">digital</span>
+          <p class="text-[10px] uppercase tracking-[0.2em] font-medium text-admin-text-muted mt-0.5">Admin Panel</p>
         </div>
       </div>
 
       <!-- Nav -->
       <nav class="p-4 space-y-1">
-        <p class="text-xs font-semibold uppercase tracking-wider px-3 mb-3 text-gray-500">Main</p>
+        <p class="text-[10px] font-bold uppercase tracking-[0.15em] px-3 mb-3 text-admin-text-dim/80">Main</p>
 
         <Link :href="route('admin.dashboard')" :class="navClass('admin.dashboard')">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
           Dashboard
         </Link>
 
-        <p class="text-xs font-semibold uppercase tracking-wider px-3 mt-6 mb-3 text-gray-500">Content</p>
+        <p class="text-[10px] font-bold uppercase tracking-[0.15em] px-3 mt-6 mb-3 text-admin-text-dim/80">Content</p>
 
         <Link :href="route('admin.portfolio.index')" :class="navClass('admin.portfolio')">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -51,7 +51,7 @@
           </span>
         </Link>
 
-        <p class="text-xs font-semibold uppercase tracking-wider px-3 mt-6 mb-3 text-gray-500">System</p>
+        <p class="text-[10px] font-bold uppercase tracking-[0.15em] px-3 mt-6 mb-3 text-admin-text-dim/80">System</p>
 
         <Link :href="route('admin.settings.index')" :class="navClass('admin.settings')">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -66,8 +66,8 @@
             {{ $page.props.auth.user?.name?.charAt(0)?.toUpperCase() ?? 'A' }}
           </div>
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium truncate">{{ $page.props.auth.user?.name }}</p>
-            <p class="text-xs truncate text-admin-text-muted">{{ $page.props.auth.user?.email }}</p>
+            <p class="text-[13px] font-semibold truncate">{{ $page.props.auth.user?.name }}</p>
+            <p class="text-[10px] font-medium truncate text-admin-text-muted">{{ $page.props.auth.user?.email }}</p>
           </div>
         </div>
         <Link :href="route('home')" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors w-full text-left mb-1 text-admin-text-dim hover:bg-white/5">
@@ -94,7 +94,7 @@
           <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 rounded-lg hover:bg-white/5">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
-          <h1 class="font-semibold text-sm font-heading">{{ title }}</h1>
+          <h1 class="font-bold text-[13px] uppercase tracking-[0.1em] font-heading text-asak-gold">{{ title }}</h1>
         </div>
         <div class="flex items-center gap-2">
           <span class="text-xs px-2 py-1 rounded-full bg-asak-gold-muted text-asak-gold">
@@ -139,10 +139,10 @@ const flash = computed(() => page.props.flash || {})
 function navClass(routeName) {
   const isActive = route().current(routeName + '.*') || route().current(routeName)
   return [
-    'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all w-full',
+    'flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-all w-full',
     isActive
-      ? 'font-medium bg-asak-gold/15 text-asak-gold'
-      : 'text-admin-text-dim hover:bg-white/5',
+      ? 'font-semibold bg-asak-gold/15 text-asak-gold'
+      : 'text-admin-text-muted hover:bg-white/5 hover:text-admin-text',
   ].join(' ')
 }
 

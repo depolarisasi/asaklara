@@ -1,18 +1,17 @@
-:root {
-    /* Brand Colors */
-    --color-asak-gold: #b8960c;
-    --color-asak-gold-hover: #d4ae11;
-    --color-asak-gold-muted: rgba(184, 150, 12, 0.2);
+    /* Brand Colors (Harmonized with Public Gold) */
+    --color-asak-gold: #FBC246;
+    --color-asak-gold-hover: #e5b13d;
+    --color-asak-gold-muted: rgba(251, 194, 70, 0.15);
 
-    /* Admin Theme - Dark */
-    --admin-bg: #0f1220;
-    --admin-sidebar: #080c18;
+    /* Admin Theme - Harmonized with Public Dark Mode (#0A1520) */
+    --admin-bg: #0A1520;
+    --admin-sidebar: #070e16;
     --admin-card: rgba(255, 255, 255, 0.03);
     --admin-border: rgba(255, 255, 255, 0.08);
     --admin-border-muted: rgba(255, 255, 255, 0.04);
-    --admin-text: #e8e4d5;
-    --admin-text-muted: #6b7280;
-    --admin-text-dim: #9ca3af;
+    --admin-text: #F5EDD8; /* Harmonized with --pub-fg in dark mode */
+    --admin-text-muted: #8FA8BF; /* Harmonized with --pub-muted-fg in dark mode */
+    --admin-text-dim: #5e788f;
 
     /* Public Site - Light Mode Default (Burgundy & Gold) */
     --pub-primary: 143 26 0;
@@ -77,8 +76,9 @@ html:not(.light) {
 
     /* Admin Glass */
     .admin-glass {
-        background: rgba(8, 12, 24, 0.9);
-        backdrop-filter: blur(12px);
+        background: rgba(10, 21, 32, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--admin-border);
     }
 
