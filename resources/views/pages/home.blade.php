@@ -153,7 +153,7 @@
 
                             {{-- Service tag pills --}}
                             <div class="flex flex-wrap gap-2 mb-8">
-                                @foreach(['Brand Engineering','Tech Development','Growth Hacking','UI/UX Design','Photo & Video','Digital Strategy'] as $tag)
+                                @foreach(['Brand Engineering','Tech Development','Growth Hacking','Photo & Video'] as $tag)
                                 <span class="px-3.5 py-1.5 rounded-full text-[0.72rem] font-medium text-white bg-[rgb(var(--pub-panel-text)/0.08)] border border-[rgb(var(--pub-panel-text)/0.16)]">
                                     {{ $tag }}
                                 </span>
@@ -197,10 +197,10 @@
 
             {{-- Pill tags --}}
             <div class="flex flex-wrap gap-2">
-                @foreach(['Brand Engineering','UI/UX Design','Visual Identity','Graphic & Video',
-                          'Tech Development','Web Apps','Custom Software',
-                          'Growth Hacking','SEO & SEM','Data-Driven Marketing',
-                          'Photo & Video','Content Creation'] as $tag)
+                @foreach(['Graphic Design',
+                          'Tech Development',
+                          'Digital Marketing',
+                          'Photography & Videography'] as $tag)
                 <span class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-[rgb(var(--pub-muted)/0.50)] border border-[rgb(var(--pub-border)/0.65)] text-[rgb(var(--pub-fg))]">
                     {{ $tag }}
                 </span>

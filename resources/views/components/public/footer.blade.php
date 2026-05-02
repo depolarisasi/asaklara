@@ -11,15 +11,7 @@
                         <img src="/logo/asak-horizontal-logo-gold.png" alt="ASAK Agency" class="h-12 w-auto">
                     </a>
                 </div>
-
-                {{-- Language Selector (Visual Only) --}}
-                <div class="mb-12 relative group pointer-events-none opacity-60">
-                    <button class="flex items-center gap-2 text-sm font-medium hover:text-white transition-colors uppercase tracking-wider">
-                        Language
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                    </button>
-                    {{-- Dropdown hint --}}
-                </div>
+ 
             </div>
 
             {{-- Sisi Kanan: 2 Kolom Link --}}
@@ -31,9 +23,7 @@
                     <ul class="flex flex-col gap-4">
                         @php
                             $services = [
-                                'AI', 'Organic Social', 'Media Activation', 'Marketing Automation', 
-                                'Website Development', 'Social Ads', 'Digital Strategy', 
-                                'Creative Production', 'Organic Search', 'Paid Search', 'Tracking'
+                                'Brand Engineering', 'Tech Development', 'Growth Hacking', 'Photo & Videography'
                             ];
                         @endphp
                         @foreach($services as $service)

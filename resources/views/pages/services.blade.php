@@ -112,8 +112,7 @@
                     </div>
                 </div>
             </div>
-            @endforeach
-reach
+            @endforeach 
         </div>
     </div>
 </section>
