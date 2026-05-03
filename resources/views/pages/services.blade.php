@@ -19,7 +19,11 @@
             @if($services->count())
             <div class="flex flex-wrap gap-3">
                 @foreach($services as $service)
-                <a href="#{{ $service->slug }}"
+                @php
+                    $isBrandEngineering = strtolower($service->title) === 'brand engineering';
+                    $linkUrl = $isBrandEngineering ? route('design') : '#' . $service->slug;
+                @endphp
+                <a href="{{ $linkUrl }}"
                    class="px-5 py-2.5 rounded-full text-sm font-medium transition-all border bg-[rgba(var(--pub-primary),0.08)] border-[rgba(var(--pub-primary),0.20)] text-primary hover:bg-[rgba(var(--pub-primary),0.18)]">
                     {{ $service->title }}
                 </a>
@@ -97,9 +101,13 @@
                         @endif
 
                         <div class="flex items-center gap-4">
-                            <a href="{{ route('contact') }}"
+                            @php
+                                $isBrandEngineering = strtolower($service->title) === 'brand engineering';
+                                $getStartedLink = $isBrandEngineering ? route('design') : route('contact');
+                            @endphp
+                            <a href="{{ $getStartedLink }}"
                                class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-opacity hover:opacity-90 bg-primary text-[rgb(var(--pub-primary-fg))]">
-                                Get Started
+                                {{ $isBrandEngineering ? 'See Plans' : 'Get Started' }}
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                 </svg>

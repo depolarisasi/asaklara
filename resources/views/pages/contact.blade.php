@@ -172,22 +172,4 @@
     </div>
 </section>
 
-                            {{-- Loading state --}}
-                            <svg x-show="sending" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                            </svg>
-                            {{-- Default state --}}
-                            <svg x-show="!sending" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                            </svg>
-                            <span x-text="sending ? 'Sending...' : 'Send Message'">Send Message</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 @endsection

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TeamController;
 use Illuminate\Support\Facades\Route;
 use Spatie\ResponseCache\Middlewares\CacheResponse;
 use Spatie\ResponseCache\Middlewares\DoNotCacheResponse;
+use App\Http\Controllers\DesignController;
 
 // =========================================
 // PUBLIC ROUTES
@@ -25,6 +26,7 @@ Route::middleware([CacheResponse::class])->group(function () {
     Route::get('/about', [AboutController::class, 'index'])->name('about');
     Route::get('/services', [ServicesController::class, 'index'])->name('services');
     Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+    Route::get('/design', [DesignController::class, 'index'])->name('design');
 });
 
 // Contact — TIDAK di-cache karena ada flash message & CSRF form

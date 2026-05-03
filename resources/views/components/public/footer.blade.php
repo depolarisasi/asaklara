@@ -28,7 +28,7 @@
                         @endphp
                         @foreach($services as $service)
                             <li>
-                                <a href="{{ route('services') }}" class="text-sm text-[rgba(var(--pub-panel-text),0.6)] hover:text-white transition-colors">
+                                <a href="{{ strtolower($service) === 'brand engineering' ? route('design') : route('services') }}" class="text-sm text-[rgba(var(--pub-panel-text),0.6)] hover:text-white transition-colors">
                                     {{ $service }}
                                 </a>
                             </li>

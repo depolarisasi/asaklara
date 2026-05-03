@@ -47,7 +47,7 @@
                                             title: 'How to build a brand identity system that AI can actually use', 
                                             readTime: '5 min read',
                                             image: '{{ asset('images/insight-ai-brand.png') }}',
-                                            link: '#'
+                                            link: '{{ route('design') }}'
                                         },
                                         { 
                                             category: 'Tech Development', 
@@ -214,18 +214,18 @@
 
             @php
                 $serviceList = (isset($services) && $services->count())
-                    ? $services->map(fn($s) => ['title' => $s->title, 'anchor' => $s->slug])->toArray()
+                    ? $services->map(fn($s) => ['title' => $s->title, 'url' => strtolower($s->title) === 'brand engineering' ? route('design') : route('services') . '#' . $s->slug])->toArray()
                     : [
-                        ['title' => 'Brand Engineering',   'anchor' => 'brand-engineering'],
-                        ['title' => 'Tech Development',    'anchor' => 'tech-development'],
-                        ['title' => 'Growth Hacking',      'anchor' => 'growth-hacking'],
-                        ['title' => 'Photo & Videography', 'anchor' => 'photo-video'],
+                        ['title' => 'Brand Engineering',   'url' => route('design')],
+                        ['title' => 'Tech Development',    'url' => route('services') . '#tech-development'],
+                        ['title' => 'Growth Hacking',      'url' => route('services') . '#growth-hacking'],
+                        ['title' => 'Photo & Videography', 'url' => route('services') . '#photo-video'],
                       ];
             @endphp
 
             <div>
                 @foreach($serviceList as $svc)
-                <a href="{{ route('services') }}#{{ $svc['anchor'] }}"
+                <a href="{{ $svc['url'] ?? '#' }}"
                    class="services-row flex items-center justify-between py-5 no-underline">
                     <span class="services-title font-heading font-semibold text-[clamp(1.05rem,1.8vw,1.4rem)]">
                         {{ $svc['title'] }}
